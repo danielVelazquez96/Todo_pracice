@@ -6,7 +6,9 @@ const txtInput =document.querySelector('.new-todo');
 const btnBorrar= document.querySelector('.clear-completed');
 const ulFiltros=document.querySelector('.filters');
 const anchorFiltros= document.querySelectorAll('.filtro');
+const countTodos=document.querySelector('.todo-count');
 
+// Crear en el html el todo
 export const crearTodoHtml=(todo)=>{
 
     const htmlTodo=
@@ -27,6 +29,20 @@ export const crearTodoHtml=(todo)=>{
     return div.firstElementChild;
 }
 
+
+// Crear el conteo de pendientes
+export const crearCountHtml=()=> {
+    
+    if(todoList.todos.length>0){
+        const pendientes=todoList.todos.filter((element)=>element.completado==false)
+        countTodos.firstChild.innerHTML=pendientes.length;
+    }else{
+        countTodos.firstChild.innerHTML=0;
+    }
+    
+
+}
+
 // -----------------------------------------------------------------------------------------------
 // Eventos
 
@@ -42,6 +58,8 @@ txtInput.addEventListener('keyup',(event)=>{
 
         crearTodoHtml(nuevoTodo);
         txtInput.value='';
+
+        crearCountHtml();
     }
 
     
@@ -63,9 +81,11 @@ divTodoList.addEventListener('click',(event)=>{
         todoList.eliminarTodo(todoId);
         divTodoList.removeChild(todoElement);
     } 
+    crearCountHtml();
 
 })
 
+// Borrar los completados
 btnBorrar.addEventListener('click',()=>{
     // Borrar logicamente los elementos
     todoList.eliminarCompletados();
@@ -79,6 +99,7 @@ btnBorrar.addEventListener('click',()=>{
     }
 })
 
+// Filtros de Todos/completados/pendientes
 ulFiltros.addEventListener('click',(event)=>{
 
    
@@ -112,6 +133,7 @@ ulFiltros.addEventListener('click',(event)=>{
          }
 
     }
+    
 
 
 })

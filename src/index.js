@@ -7,7 +7,7 @@ import './styles.css';
 // Importacion del archivo que tiene agrupadas las clases
 // Cuando no se especifica el archivo agarra automaticamente el index
 import { Todo, TodoList } from './classes';
-import { crearTodoHtml } from './js/componentes';
+import { crearCountHtml, crearTodoHtml } from './js/componentes';
 
 export const todoList= new TodoList();
 
@@ -17,6 +17,9 @@ export const todoList= new TodoList();
 // Por cada argumneto del foreach va a ser el argumneto de la funcion llamada
 // Esto solo funciona si el metodo tiene 1 argumneto
 todoList.todos.forEach(crearTodoHtml);
+
+crearCountHtml();
+// console.log(todoList.todos)
 
 // todoList.todos.forEach(element => {
 //     crearTodoHtml(element);
